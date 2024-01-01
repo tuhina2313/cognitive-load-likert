@@ -28,17 +28,17 @@ function displayQuestion() {
     var ratingScale = document.getElementById("rating-scale");
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
+    optionsContainer.textContent = questions[currentQuestionIndex].option;
+    answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
+    
+    // questions[currentQuestionIndex].options.forEach(function (option, index) {
+    //     var optionDiv = document.createElement("div");
+    //     optionDiv.className = "option";
+    //     optionDiv.textContent = option;
+    //     answersArray.push(JSON.stringify(option));
 
-    // Display the options
-    optionsContainer.innerHTML = "";
-    questions[currentQuestionIndex].options.forEach(function (option, index) {
-        var optionDiv = document.createElement("div");
-        optionDiv.className = "option";
-        optionDiv.textContent = option;
-        answersArray.push(JSON.stringify(option));
-
-        optionsContainer.appendChild(optionDiv);
-    });
+    //     optionsContainer.appendChild(optionDiv);
+    // });
 
     ratingScale.innerHTML = "";
     for (let i = 1; i <= 7; i++) {
@@ -136,7 +136,7 @@ function displayQuestion() {
 
     nextButton.style.display = "block";
     submitButton.style.display = "none";
-    if (currentQuestionIndex === questions.length-2){
+    if (currentQuestionIndex === questions.length-1){
             displayLastPage();
             submitButton.style.display = "block";
         }
@@ -151,7 +151,7 @@ readCSV("questions-sample.csv", function (data) {
         console.log("A: ", questionData[1]);
         var question = {
             question: questionData[0],
-            options: questionData[1],
+            option: questionData[1],
         };
         questions.push(question);
     }
