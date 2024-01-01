@@ -30,7 +30,7 @@ function displayQuestion() {
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
     answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
-    
+
     // questions[currentQuestionIndex].options.forEach(function (option, index) {
     //     var optionDiv = document.createElement("div");
     //     optionDiv.className = "option";
@@ -67,14 +67,11 @@ function displayQuestion() {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
             console.log("Elapsed time: " + elapsedTime + " milliseconds");
-            //responseData[questions[currentQuestionIndex]] = selectedOption;
-            //responseTimeData[questions[currentQuestionIndex]] = elapsedTime;
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + ratingsArray);
 
             // Move to the next question
-            currentQuestionIndex++;
             console.log("Question Index: " + currentQuestionIndex);
             selectedOption = null; // Reset selected option
             userRating = null; 
@@ -91,6 +88,7 @@ function displayQuestion() {
                 displayLastPage();
                 submitButton.style.display = "block";
             }
+            currentQuestionIndex++;
         } 
     });
     submitButton.addEventListener("click", function () {
@@ -99,7 +97,7 @@ function displayQuestion() {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
             
-            responseData.push(JSON.stringify(selectedOption));
+            answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
             responseTimeData.push(JSON.stringify(elapsedTime));
             }
         console.log("Submit Triggered");
@@ -119,7 +117,7 @@ function displayQuestion() {
         // attach data I want to send back
         const responseUserData = document.createElement('input');
         responseUserData.name = 'response';
-        responseUserData.value = JSON.stringify(responseData);
+        responseUserData.value = JSON.stringify(answersArray);
         responseUserData.hidden = true;
         form.appendChild(responseUserData);
 
@@ -136,19 +134,12 @@ function displayQuestion() {
 
     nextButton.style.display = "block";
     submitButton.style.display = "none";
-    if (currentQuestionIndex === questions.length-1){
-            displayLastPage();
-            submitButton.style.display = "block";
-        }
 }
     // Entry point
 readCSV("questions-sample.csv", function (data) {
     // Assuming CSV structure: question, option
     for (var i = 0; i < data.length; i++) {
         var questionData = data[i];
-        console.log("D: ", questionData);
-        console.log("Q: ", questionData[0]);
-        console.log("A: ", questionData[1]);
         var question = {
             question: questionData[0],
             option: questionData[1],
