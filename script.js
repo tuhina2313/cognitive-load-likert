@@ -160,7 +160,3 @@ readCSV("questions-sample.csv", function (data) {
     console.log("Number of questions: " + questions.length);
     displayQuestion();
 });
-    // Start the survey
-startTime = new Date();
-displayQuestion();
-console.log("Number of questions: " + questions.length);
