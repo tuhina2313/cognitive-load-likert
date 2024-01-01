@@ -1,3 +1,4 @@
+var questions = [];
 var currentQuestionIndex = 0;
 var userRating = null;
 var ratingsArray = [];
