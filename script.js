@@ -143,13 +143,15 @@ function displayQuestion() {
 }
     // Entry point
 readCSV("questions-sample.csv", function (data) {
-    // Assuming CSV structure: question, option1, option2, ..., correctAnswer
+    // Assuming CSV structure: question, option
     for (var i = 0; i < data.length; i++) {
         var questionData = data[i];
+        console.log("D: ", questionData);
+        console.log("Q: ", questionData[0]);
+        console.log("A: ", questionData[1]);
         var question = {
             question: questionData[0],
-            options: questionData.slice(1, -1),
-            correctAnswer: questionData[questionData.length - 1]
+            options: questionData[1],
         };
         questions.push(question);
     }
