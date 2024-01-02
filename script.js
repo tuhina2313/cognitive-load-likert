@@ -88,6 +88,7 @@ function displayQuestion() {
 
             // Move to the next question
             console.log("Question Index: " + currentQuestionIndex);
+            currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
             if (currentQuestionIndex < questions.length) {
@@ -103,7 +104,6 @@ function displayQuestion() {
                 displayLastPage();
                 submitButton.style.display = "block";
             }
-            currentQuestionIndex++;
         } 
     });
     submitButton.addEventListener("click", function () {
