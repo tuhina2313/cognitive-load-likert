@@ -115,7 +115,7 @@ function displayQuestion() {
             answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
             responseTimeData.push(JSON.stringify(elapsedTime));
             }
-        console.log("Submit Triggered");
+        console.log("Submit Triggered" + allResponses);
         
         const urlParams = new URLSearchParams(window.location.search); 
         const form = document.createElement('form');
