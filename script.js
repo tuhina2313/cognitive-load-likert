@@ -4,6 +4,7 @@ var userRating = null;
 var ratingsArray = [];
 var answersArray = [];
 var responseTimeData = [];
+var allResponses = [];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -12,6 +13,18 @@ function readCSV(file, callback) {
             callback(result.data);
         }
     });
+}
+
+function createResponseData(ques, res, ratingVal, startT, endT, elaspsedT){
+    var responseData = {
+        question: ques,
+        response: res,
+        rating: JSON.stringify(ratingVal),
+        startT: JSON.stringify(startT),
+        endT: JSON.stringify(endT),
+        responseT: JSON.stringify(elaspsedT),
+    };
+    allResponses.push(responseData);
 }
 
 function displayLastPage() {
@@ -71,6 +84,8 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + ratingsArray);
 
+            createResponseData(questions[currentQuestionIndex].question, questions[currentQuestionIndex].option, userRating, startTime, endTime, elapsedTime);
+
             // Move to the next question
             console.log("Question Index: " + currentQuestionIndex);
             selectedOption = null; // Reset selected option
@@ -117,7 +132,7 @@ function displayQuestion() {
         // attach data I want to send back
         const responseUserData = document.createElement('input');
         responseUserData.name = 'response';
-        responseUserData.value = JSON.stringify(answersArray);
+        responseUserData.value = JSON.stringify(allResponses);
         responseUserData.hidden = true;
         form.appendChild(responseUserData);
 
