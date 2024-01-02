@@ -40,6 +40,9 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
+    question_text = JSON.stringify(questions[currentQuestionIndex].question);
+    option_text = JSON.stringify(questions[currentQuestionIndex].option);
+
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
     answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
@@ -84,7 +87,7 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + ratingsArray);
 
-            createResponseData(questions[currentQuestionIndex].question, questions[currentQuestionIndex].option, userRating, startTime, endTime, elapsedTime);
+            createResponseData(question_text, option_text, userRating, startTime, endTime, elapsedTime);
 
             // Move to the next question
             console.log("Question Index: " + currentQuestionIndex);
