@@ -139,11 +139,11 @@ function displayQuestion() {
         responseUserData.hidden = true;
         form.appendChild(responseUserData);
 
-        const timeUserData = document.createElement('input');
-        timeUserData.name = 'responseTime';
-        timeUserData.value = JSON.stringify(responseTimeData);
-        timeUserData.hidden = true;
-        form.appendChild(timeUserData);
+        // const timeUserData = document.createElement('input');
+        // timeUserData.name = 'responseTime';
+        // timeUserData.value = JSON.stringify(responseTimeData);
+        // timeUserData.hidden = true;
+        // form.appendChild(timeUserData);
         
         // attach the form to the HTML document and trigger submission
         document.body.appendChild(form);
