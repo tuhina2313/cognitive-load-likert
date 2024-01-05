@@ -5,6 +5,7 @@ var ratingsArray = [];
 var answersArray = [];
 var responseTimeData = [];
 var allResponses = [];
+var allClicks = [];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -15,11 +16,12 @@ function readCSV(file, callback) {
     });
 }
 
-function createResponseData(ques, res, ratingVal, startT, endT, elaspsedT){
+function createResponseData(ques, res, ratingVal, allClicks, startT, endT, elaspsedT){
     var responseData = {
         question: ques,
         response: res,
         rating: JSON.stringify(ratingVal),
+        clicks: allClicks,
         startT: JSON.stringify(startT),
         endT: JSON.stringify(endT),
         responseT: JSON.stringify(elaspsedT),
@@ -65,6 +67,7 @@ function displayQuestion() {
         ratingOption.addEventListener("click", function () {
             userRating = i;
             console.log("User Rating: " + userRating);
+            allClicks.push(userRating);
 
             // Remove previous selection styling
             document.querySelectorAll('.rating-option').forEach(function (el) {
@@ -87,7 +90,7 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + ratingsArray);
 
-            createResponseData(question_text, option_text, userRating, startTime, endTime, elapsedTime);
+            createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
 
             // Move to the next question
             console.log("Question Index: " + currentQuestionIndex);
