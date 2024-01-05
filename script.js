@@ -88,7 +88,7 @@ function displayQuestion() {
             console.log("Elapsed time: " + elapsedTime + " milliseconds");
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
-            console.log("Array: " + ratingsArray);
+            console.log("Array: " + allClicks);
 
             createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
 
