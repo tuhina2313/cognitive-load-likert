@@ -97,6 +97,7 @@ function displayQuestion() {
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
+            allClicks = null;
             if (currentQuestionIndex < questions.length) {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
