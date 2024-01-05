@@ -68,6 +68,7 @@ function displayQuestion() {
             userRating = i;
             console.log("User Rating: " + userRating);
             allClicks.push(userRating);
+            console.log("All clicks: " + allClicks);
 
             // Remove previous selection styling
             document.querySelectorAll('.rating-option').forEach(function (el) {
@@ -97,7 +98,7 @@ function displayQuestion() {
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
-            allClicks = null;
+            allClicks = [];
             if (currentQuestionIndex < questions.length) {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
