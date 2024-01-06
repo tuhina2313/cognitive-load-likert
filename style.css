@@ -10,7 +10,8 @@ body {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
-    position: relative;
+    position: absolute;
+    margin-left: 8%;
 }
 .rating-option {
     cursor: pointer;
@@ -19,7 +20,7 @@ body {
     border-radius: 5px;
     width: 10px;
     text-align: center;
-    margin-right: 5px;
+    margin:auto;
 }
 #submit-btn {
     background-color: #04AA6D; /* Green */
