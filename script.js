@@ -44,14 +44,14 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
-    question_text = JSON.stringify(questions[currentQuestionIndex].question);
-    option_text = JSON.stringify(questions[currentQuestionIndex].option);
+    var question_text = JSON.stringify(questions[currentQuestionIndex].question);
+    var option_text = JSON.stringify(questions[currentQuestionIndex].option);
     question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
-
+    correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
-    answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
+    answersArray.push(option_text);
 
     // questions[currentQuestionIndex].options.forEach(function (option, index) {
     //     var optionDiv = document.createElement("div");
@@ -94,17 +94,28 @@ function displayQuestion() {
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
+
+            if (tag == "attentionCheck")
+            {
+                if(correct_option != JSON.stringify(userRating))
+                {
+                    displayLastPage();
+                }
+            }
+
             createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
             allClicks = [];
 
-            if (currentQuestionIndex < questions.length) {
+            if (currentQuestionIndex < questions.length) 
+            {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
             }
-            else{
+            else
+            {
                 questionContainer.style.display = 'none';
                 optionsContainer.style.display = 'none';
                 nextButton.style.display = 'none';
@@ -162,6 +173,7 @@ readCSV("questions-sample.csv", function (data) {
             question: questionData[0],
             option: questionData[1],
             tag: questionData[2],
+            correct_option: questionData[3],
         };
         questions.push(question);
     }
