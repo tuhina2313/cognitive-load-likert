@@ -94,15 +94,13 @@ function displayQuestion() {
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
+            createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
+            currentQuestionIndex++;
+            selectedOption = null; // Reset selected option
+            userRating = null; 
+            allClicks = [];
 
             if (currentQuestionIndex < questions.length) {
-                createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
-                // Move to the next question
-                currentQuestionIndex++;
-                selectedOption = null; // Reset selected option
-                userRating = null; 
-                allClicks = [];
-
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
             }
