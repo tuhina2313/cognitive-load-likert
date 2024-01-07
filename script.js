@@ -95,7 +95,7 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
 
-            if (tag == "attentionCheck")
+            if (question_tag == "attentionCheck")
             {
                 if(correct_option != JSON.stringify(userRating))
                 {
