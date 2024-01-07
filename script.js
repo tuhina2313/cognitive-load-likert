@@ -221,7 +221,6 @@ readCSV("questions-sample.csv", function (data) {
         };
         questions.push(question);
     }
-});
 // readCSV("attention_checks.csv", function (check_data) {
 //         // Assuming CSV structure: prompt, action
 //         for (var i = 0; i < check_data.length; i++) {
@@ -236,3 +235,4 @@ readCSV("questions-sample.csv", function (data) {
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 displayQuestion();
+});
