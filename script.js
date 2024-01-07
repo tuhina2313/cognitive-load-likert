@@ -70,6 +70,11 @@ function displayQuestion() {
     var nextButton = document.getElementById("next-btn");
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
+    var check_prompt = document.getElementById("attention-prompt");
+    var check_ques = document.getElementById("attention-question");
+
+    check_prompt.style.display = 'none';
+    check_ques.style.display = 'none';
 
     question_text = JSON.stringify(questions[currentQuestionIndex].question);
     option_text = JSON.stringify(questions[currentQuestionIndex].option);
@@ -120,7 +125,7 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
 
-            if (currentQuestionIndex < questions.length && !(checkIndex.includes(currentQuestionIndex))) {
+            if (currentQuestionIndex < questions.length) {
                 console.log("Inside R loop: Qind " + currentQuestionIndex);
                 createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
                 // Move to the next question
@@ -141,7 +146,8 @@ function displayQuestion() {
                 displayLastPage();
                 submitButton.style.display = "block";
             }
-            if (checkIndex.includes(currentQuestionIndex))
+            // if (checkIndex.includes(currentQuestionIndex))
+            if (currentQuestionIndex == 1)
             {
                 console.log("Inside check loop: Qind " + currentQuestionIndex);
                 console.log("Inside check loop: Cind " + currentCheckIndex);
