@@ -1,11 +1,15 @@
 var questions = [];
+var checks = [];
 var currentQuestionIndex = 0;
+var currentCheckIndex = 0;
 var userRating = null;
 var ratingsArray = [];
 var answersArray = [];
 var responseTimeData = [];
 var allResponses = [];
 var allClicks = [];
+var allChecks = [];
+var checkIndex = [1];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -14,6 +18,31 @@ function readCSV(file, callback) {
             callback(result.data);
         }
     });
+}
+
+function displayAttentionCheck()
+{
+    var check_prompt = document.getElementById("attention-prompt");
+    var check_ques = document.getElementById("attention-question");
+
+    questionContainer.style.display = 'none';
+    optionsContainer.style.display = 'none';
+
+    check_prompt.textContent = checks[currentCheckIndex].prompt;
+    check_ques.textContent = checks[currentCheckIndex].question;
+}
+
+function createCheckData(prompt, question, ratingVal, allClicks, startT, endT, elaspsedT){
+    var checkData = {
+        prompt: prompt,
+        question: question,
+        rating: JSON.stringify(ratingVal),
+        clicks: allClicks,
+        startT: JSON.stringify(startT),
+        endT: JSON.stringify(endT),
+        responseT: JSON.stringify(elaspsedT),
+    };
+    allChecks.push(responseData);
 }
 
 function createResponseData(ques, res, ratingVal, allClicks, startT, endT, elaspsedT){
@@ -91,15 +120,15 @@ function displayQuestion() {
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
 
-            createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
+            if (currentQuestionIndex < questions.length && !(checkIndex.includes(currentQuestionIndex))) {
+                console.log("Inside R loop: Qind " + currentQuestionIndex);
+                createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
+                // Move to the next question
+                currentQuestionIndex++;
+                selectedOption = null; // Reset selected option
+                userRating = null; 
+                allClicks = [];
 
-            // Move to the next question
-            console.log("Question Index: " + currentQuestionIndex);
-            currentQuestionIndex++;
-            selectedOption = null; // Reset selected option
-            userRating = null; 
-            allClicks = [];
-            if (currentQuestionIndex < questions.length) {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
             }
@@ -111,6 +140,14 @@ function displayQuestion() {
                 document.getElementById("rating-text").style.display = 'none';
                 displayLastPage();
                 submitButton.style.display = "block";
+            }
+            if (checkIndex.includes(currentQuestionIndex))
+            {
+                console.log("Inside check loop: Qind " + currentQuestionIndex);
+                console.log("Inside check loop: Cind " + currentCheckIndex);
+                displayAttentionCheck();
+                createCheckData(checks[currentCheckIndex].prompt, checks[currentCheckIndex].question, userRating, allClicks, startTime, endTime, elapsedTime);
+                currentCheckIndex++;
             }
         } 
     });
@@ -144,11 +181,11 @@ function displayQuestion() {
         responseUserData.hidden = true;
         form.appendChild(responseUserData);
 
-        // const timeUserData = document.createElement('input');
-        // timeUserData.name = 'responseTime';
-        // timeUserData.value = JSON.stringify(responseTimeData);
-        // timeUserData.hidden = true;
-        // form.appendChild(timeUserData);
+        const checkUserData = document.createElement('input');
+        checkUserData.name = 'attentionChecks';
+        checkUserData.value = JSON.stringify(allChecks);
+        checkUserData.hidden = true;
+        form.appendChild(checkUserData);
         
         // attach the form to the HTML document and trigger submission
         document.body.appendChild(form);
@@ -169,8 +206,18 @@ readCSV("questions-sample.csv", function (data) {
         };
         questions.push(question);
     }
-
-    startTime = new Date();
-    console.log("Number of questions: " + questions.length);
-    displayQuestion();
 });
+readChecks("attention_checks.csv", function (check_data) {
+        // Assuming CSV structure: prompt, action
+        for (var i = 0; i < check_data.length; i++) {
+            var aData = check_data[i];
+            var check = {
+                prompt: aData[0],
+                question: aData[1],
+            };
+            checks.push(check);
+        }
+});
+startTime = new Date();
+console.log("Number of questions: " + questions.length);
+displayQuestion();
