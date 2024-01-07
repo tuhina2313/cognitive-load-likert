@@ -1,26 +1,12 @@
 var questions = [];
 var currentQuestionIndex = 0;
-var currentCheckIndex = 0;
 var userRating = null;
 var ratingsArray = [];
 var answersArray = [];
 var responseTimeData = [];
 var allResponses = [];
 var allClicks = [];
-var allChecks = [];
-var checkIndex = [1];
 
-var checks = [
-    {
-        prompt: "The intriguing multiverse thoery posits that our universe is just one among many, offering a mind-bending perspective on the nature of reality and the possibilities beyond our observable cosmos. To demonstrate that you've read this much, just go ahead and select the second option below, no matter what the correct answer is. Yes, ignore the question below and select the above-mentioned option.",
-        question: ["Rate the prompt on the scale given"]
-    },
-    {
-        prompt: "The brain is an astonishingly complex organ. Its abilities to process information, adapt to new experiences, and generate consciousness remain the subject of ongoing scientific exploration. To demonstrate that you've read this much, just go ahead and select the last option below, no matter what the correct answer is. Yes, ignore the question below and select the above-mentioned option.",
-        question: ["Rate the prompt on the scale given"]
-    },
-    // Add more questions as needed
-];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -31,35 +17,11 @@ function readCSV(file, callback) {
     });
 }
 
-function displayAttentionCheck()
-{
-    var check_prompt = document.getElementById("attention-prompt");
-    var check_ques = document.getElementById("attention-question");
-
-    questionContainer.style.display = 'none';
-    optionsContainer.style.display = 'none';
-
-    check_prompt.textContent = checks[currentCheckIndex].prompt;
-    check_ques.textContent = checks[currentCheckIndex].question;
-}
-
-function createCheckData(prompt, question, ratingVal, allClicks, startT, endT, elaspsedT){
-    var checkData = {
-        prompt: prompt,
-        question: question,
-        rating: JSON.stringify(ratingVal),
-        clicks: allClicks,
-        startT: JSON.stringify(startT),
-        endT: JSON.stringify(endT),
-        responseT: JSON.stringify(elaspsedT),
-    };
-    allChecks.push(responseData);
-}
-
-function createResponseData(ques, res, ratingVal, allClicks, startT, endT, elaspsedT){
+function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
     var responseData = {
         question: ques,
         response: res,
+        tag: question_tag,
         rating: JSON.stringify(ratingVal),
         clicks: allClicks,
         startT: JSON.stringify(startT),
@@ -81,12 +43,11 @@ function displayQuestion() {
     var nextButton = document.getElementById("next-btn");
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
-    var attentionContainer = document.getElementById("attention-container");
-
-    attentionContainer.style.display = 'none';
 
     question_text = JSON.stringify(questions[currentQuestionIndex].question);
     option_text = JSON.stringify(questions[currentQuestionIndex].option);
+    question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
+
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
@@ -135,8 +96,7 @@ function displayQuestion() {
             console.log("Array: " + allClicks);
 
             if (currentQuestionIndex < questions.length) {
-                console.log("Inside R loop: Qind " + currentQuestionIndex);
-                createResponseData(question_text, option_text, userRating, allClicks, startTime, endTime, elapsedTime);
+                createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
                 // Move to the next question
                 currentQuestionIndex++;
                 selectedOption = null; // Reset selected option
@@ -154,15 +114,6 @@ function displayQuestion() {
                 document.getElementById("rating-text").style.display = 'none';
                 displayLastPage();
                 submitButton.style.display = "block";
-            }
-            // if (checkIndex.includes(currentQuestionIndex))
-            if (currentQuestionIndex == 1)
-            {
-                console.log("Inside check loop: Qind " + currentQuestionIndex);
-                console.log("Inside check loop: Cind " + currentCheckIndex);
-                displayAttentionCheck();
-                createCheckData(checks[currentCheckIndex].prompt, checks[currentCheckIndex].question, userRating, allClicks, startTime, endTime, elapsedTime);
-                currentCheckIndex++;
             }
         } 
     });
@@ -195,12 +146,6 @@ function displayQuestion() {
         responseUserData.value = JSON.stringify(allResponses);
         responseUserData.hidden = true;
         form.appendChild(responseUserData);
-
-        const checkUserData = document.createElement('input');
-        checkUserData.name = 'attentionChecks';
-        checkUserData.value = JSON.stringify(allChecks);
-        checkUserData.hidden = true;
-        form.appendChild(checkUserData);
         
         // attach the form to the HTML document and trigger submission
         document.body.appendChild(form);
@@ -218,20 +163,11 @@ readCSV("questions-sample.csv", function (data) {
         var question = {
             question: questionData[0],
             option: questionData[1],
+            tag: questionData[2],
         };
         questions.push(question);
     }
-// readCSV("attention_checks.csv", function (check_data) {
-//         // Assuming CSV structure: prompt, action
-//         for (var i = 0; i < check_data.length; i++) {
-//             var aData = check_data[i];
-//             var check = {
-//                 prompt: aData[0],
-//                 question: aData[1],
-//             };
-//             checks.push(check);
-//         }
-// });
+
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 displayQuestion();
