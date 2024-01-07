@@ -1,5 +1,4 @@
 var questions = [];
-var checks = [];
 var currentQuestionIndex = 0;
 var currentCheckIndex = 0;
 var userRating = null;
@@ -10,6 +9,18 @@ var allResponses = [];
 var allClicks = [];
 var allChecks = [];
 var checkIndex = [1];
+
+var checks = [
+    {
+        prompt: "The intriguing multiverse thoery posits that our universe is just one among many, offering a mind-bending perspective on the nature of reality and the possibilities beyond our observable cosmos. To demonstrate that you've read this much, just go ahead and select the second option below, no matter what the correct answer is. Yes, ignore the question below and select the above-mentioned option.",
+        question: ["Rate the prompt on the scale given"]
+    },
+    {
+        prompt: "The brain is an astonishingly complex organ. Its abilities to process information, adapt to new experiences, and generate consciousness remain the subject of ongoing scientific exploration. To demonstrate that you've read this much, just go ahead and select the last option below, no matter what the correct answer is. Yes, ignore the question below and select the above-mentioned option.",
+        question: ["Rate the prompt on the scale given"]
+    },
+    // Add more questions as needed
+];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -211,17 +222,17 @@ readCSV("questions-sample.csv", function (data) {
         questions.push(question);
     }
 });
-readCSV("attention_checks.csv", function (check_data) {
-        // Assuming CSV structure: prompt, action
-        for (var i = 0; i < check_data.length; i++) {
-            var aData = check_data[i];
-            var check = {
-                prompt: aData[0],
-                question: aData[1],
-            };
-            checks.push(check);
-        }
-});
+// readCSV("attention_checks.csv", function (check_data) {
+//         // Assuming CSV structure: prompt, action
+//         for (var i = 0; i < check_data.length; i++) {
+//             var aData = check_data[i];
+//             var check = {
+//                 prompt: aData[0],
+//                 question: aData[1],
+//             };
+//             checks.push(check);
+//         }
+// });
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 displayQuestion();
