@@ -94,6 +94,7 @@ function displayQuestion() {
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
             console.log("Array: " + allClicks);
+            console.log("Tag: "+ question_tag + "correct: " + correct_option)
 
             if (question_tag == "attentionCheck")
             {
