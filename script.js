@@ -97,9 +97,19 @@ function displayQuestion() {
 
             if (question_tag == "attentionCheck")
             {
+                console.log("Enter check");
                 if(correct_option != JSON.stringify(userRating))
                 {
-                    displayLastPage();
+                    console.log("Enter check2");
+                    questionContainer.style.display = 'none';
+                    optionsContainer.style.display = 'none';
+                    nextButton.style.display = 'none';
+                    ratingScale.style.display = 'none';
+                    document.getElementById("rating-text").style.display = 'none';
+                    var endPage = document.getElementById("end-container");
+                    endPage.innerHTML = "";
+                    endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end."
+                    submitButton.style.display = "block";
                 }
             }
 
