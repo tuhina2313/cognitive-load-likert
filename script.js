@@ -70,11 +70,9 @@ function displayQuestion() {
     var nextButton = document.getElementById("next-btn");
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
-    var check_prompt = document.getElementById("attention-prompt");
-    var check_ques = document.getElementById("attention-question");
+    var attentionContainer = document.getElementById("attention-container");
 
-    check_prompt.style.display = 'none';
-    check_ques.style.display = 'none';
+    attentionContainer.style.display = 'none';
 
     question_text = JSON.stringify(questions[currentQuestionIndex].question);
     option_text = JSON.stringify(questions[currentQuestionIndex].option);
@@ -213,7 +211,7 @@ readCSV("questions-sample.csv", function (data) {
         questions.push(question);
     }
 });
-readChecks("attention_checks.csv", function (check_data) {
+readCSV("attention_checks.csv", function (check_data) {
         // Assuming CSV structure: prompt, action
         for (var i = 0; i < check_data.length; i++) {
             var aData = check_data[i];
