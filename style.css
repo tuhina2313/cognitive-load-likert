@@ -58,3 +58,7 @@ body {
 .flex-item:Box2 {
     margin-right: 30px;
 } 
+#timer {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
