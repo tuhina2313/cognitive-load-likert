@@ -90,9 +90,7 @@ function displayQuestion() {
 
         ratingOption.addEventListener("click", function () {
             userRating = i;
-            console.log("User Rating: " + userRating);
             allClicks.push(userRating);
-            console.log("All clicks: " + allClicks);
 
             // Remove previous selection styling
             document.querySelectorAll('.rating-option').forEach(function (el) {
@@ -111,14 +109,11 @@ function displayQuestion() {
         if (userRating) {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
-            console.log("Elapsed time: " + elapsedTime + " milliseconds");
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
-            console.log("Correct Option clean: and rating" + correct_option.replace(/[^a-zA-Z0-9]/g, '') + " R " + userRating);
 
             if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
             {
-                console.log("Enter check");
                 if(correct_option.replace(/[^a-zA-Z0-9]/g, '') != userRating)
                 {
                     document.getElementById("Box1").style.display = 'none';
@@ -126,7 +121,7 @@ function displayQuestion() {
                     var endPage = document.getElementById("end-container");
                     endPage.innerHTML = "";
                     endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end."
-                    submitButton.style.display = "block";
+                    displayLastPage();
                 }
             }
 
@@ -158,7 +153,7 @@ function displayQuestion() {
             answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
             responseTimeData.push(JSON.stringify(elapsedTime));
             }
-        console.log("Submit Triggered" + allResponses);
+        console.log("Submit Triggered" + JSON.stringify(allResponses));
         
         const urlParams = new URLSearchParams(window.location.search); 
         const form = document.createElement('form');
