@@ -30,9 +30,11 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    position: absolute;
     top: 30%;
     right: 50%;
 }
+
 #next-btn {
     background-color: #008CBA; /* Blue */
     border: none;

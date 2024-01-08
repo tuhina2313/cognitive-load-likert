@@ -97,10 +97,11 @@ function displayQuestion() {
             // Remove previous selection styling
             document.querySelectorAll('.rating-option').forEach(function (el) {
                 el.style.backgroundColor = "";
+                if (el.textContent == userRating)
+                {
+                    el.style.backgroundColor = "#e0e0e0";
+                }
             });
-
-            // Add new selection styling
-            ratingOption.style.backgroundColor = "#e0e0e0";
         });
 
         ratingScale.appendChild(ratingOption);
