@@ -6,7 +6,7 @@ var answersArray = [];
 var responseTimeData = [];
 var allResponses = [];
 var allClicks = [];
-
+var studyTime = 1;
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -15,6 +15,22 @@ function readCSV(file, callback) {
             callback(result.data);
         }
     });
+}
+
+function updateTimer() {
+    var currentTime = new Date().getTime();
+    const remainingTime = endStudyTime - currentTime;
+    if (remainingTime <= 0) {
+      // Time is up, show the submit button
+      displayLastPage();
+    } else {
+      // Calculate remaining minutes and seconds
+      const minutes = Math.floor(remainingTime / 60000);
+      const seconds = Math.floor((remainingTime % 60000) / 1000);
+
+      document.getElementById('timer').innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
+      setTimeout(updateTimer, 1000); // Update every second
+    }
 }
 
 function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
@@ -32,6 +48,8 @@ function createResponseData(ques, res, question_tag, ratingVal, allClicks, start
 }
 
 function displayLastPage() {
+    var submitButton = document.getElementById("submit-btn");
+    submitButton.style.display = 'block';
     var endPage = document.getElementById("end-container");
     endPage.innerHTML = "";
     endPage.textContent = "Thank you for participating in the study. Please click on the submit button to finish."
@@ -126,13 +144,9 @@ function displayQuestion() {
             }
             else
             {
-                questionContainer.style.display = 'none';
-                optionsContainer.style.display = 'none';
-                nextButton.style.display = 'none';
-                ratingScale.style.display = 'none';
-                document.getElementById("rating-text").style.display = 'none';
-                displayLastPage();
-                submitButton.style.display = "block";
+                document.getElementById("Box1").style.display = 'none';
+                document.getElementById("Box2").style.display = 'none';
+                updateTimer();
             }
         } 
     });
@@ -187,7 +201,8 @@ readCSV("questions-sample.csv", function (data) {
         };
         questions.push(question);
     }
-
+const startStudyTime = new Date().getTime();
+const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 displayQuestion();
