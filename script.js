@@ -7,6 +7,8 @@ var responseTimeData = [];
 var allResponses = [];
 var allClicks = [];
 var studyTime = 1;
+const startStudyTime = new Date().getTime();
+const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -197,8 +199,6 @@ readCSV("questions-sample.csv", function (data) {
         };
         questions.push(question);
     }
-const startStudyTime = new Date().getTime();
-const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 displayQuestion();
