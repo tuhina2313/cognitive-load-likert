@@ -111,19 +111,15 @@ function displayQuestion() {
             console.log("Elapsed time: " + elapsedTime + " milliseconds");
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
-            console.log("Correct Option clean: " + correct_option.replace(/[^a-zA-Z0-9]/g, ''));
+            console.log("Correct Option clean: and rating" + correct_option.replace(/[^a-zA-Z0-9]/g, '') + " R " + userRating);
 
             if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
             {
                 console.log("Enter check");
-                if(correct_option != JSON.stringify(userRating))
+                if(correct_option.replace(/[^a-zA-Z0-9]/g, '') != userRating)
                 {
-                    console.log("Enter check2");
-                    questionContainer.style.display = 'none';
-                    optionsContainer.style.display = 'none';
-                    nextButton.style.display = 'none';
-                    ratingScale.style.display = 'none';
-                    document.getElementById("rating-text").style.display = 'none';
+                    document.getElementById("Box1").style.display = 'none';
+                    document.getElementById("Box2").style.display = 'none';
                     var endPage = document.getElementById("end-container");
                     endPage.innerHTML = "";
                     endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end."
