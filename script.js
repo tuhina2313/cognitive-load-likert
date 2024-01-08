@@ -195,6 +195,6 @@ readCSV("questions-sample.csv", function (data) {
 
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
-console.log("All data: "+ questions);
+console.log("All data: "+ JSON.stringify(questions));
 displayQuestion();
 });
