@@ -46,10 +46,7 @@ function displayQuestion() {
 
     var question_text = JSON.stringify(questions[currentQuestionIndex].question);
     var option_text = JSON.stringify(questions[currentQuestionIndex].option);
-    question_tag = questions[currentQuestionIndex].tag;
-    console.log("Without stringyfy: "+ question_tag);
-    question_tag = JSON.stringify(question_tag);
-    console.log("With stringyfy: "+ question_tag);
+    question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
     correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
@@ -96,11 +93,9 @@ function displayQuestion() {
             console.log("Elapsed time: " + elapsedTime + " milliseconds");
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
-            console.log("Array: " + allClicks);
-            console.log("Tag: "+ question_tag + "correct: " + correct_option);
-            console.log("Clean tag: "+ question_tag.replace(/[^a-zA-Z0-9]/g, ''));
+            console.log("Correct Option clean: " + correct_option.replace(/[^a-zA-Z0-9]/g, ''));
 
-            if (question_tag == "attentionCheck")
+            if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
             {
                 console.log("Enter check");
                 if(correct_option != JSON.stringify(userRating))
@@ -195,6 +190,5 @@ readCSV("questions-sample.csv", function (data) {
 
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
-console.log("All data: "+ JSON.stringify(questions));
 displayQuestion();
 });
