@@ -127,7 +127,9 @@ function displayQuestion() {
                     displayLastPage();
                 }
             }
-
+            console.log("Question in next: " + question_text);
+            console.log("Res next: " + option_text);
+            console.log("Tag next: " + question_tag);
             createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
