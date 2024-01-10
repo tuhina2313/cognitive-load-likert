@@ -64,12 +64,15 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
-    console.log("Questions all: " + JSON.stringify(questions));
-
     var question_text = JSON.stringify(questions[currentQuestionIndex].question);
     var option_text = JSON.stringify(questions[currentQuestionIndex].option);
-    question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
-    correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
+    var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
+    var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
+
+    console.log("Question each: " + question_text);
+    console.log("Res: " + option_text);
+    console.log("Tag: " + question_tag);
+    console.log("opt: " + correct_option);
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
