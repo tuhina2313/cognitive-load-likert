@@ -36,6 +36,9 @@ function updateTimer() {
 }
 
 function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
+    console.log("Question each: " + ques);
+    console.log("Res: " + res);
+    console.log("Tag: " + question_tag);
     var responseData = {
         question: ques,
         response: res,
@@ -68,11 +71,6 @@ function displayQuestion() {
     var option_text = JSON.stringify(questions[currentQuestionIndex].option);
     var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
     var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
-
-    console.log("Question each: " + question_text);
-    console.log("Res: " + option_text);
-    console.log("Tag: " + question_tag);
-    console.log("opt: " + correct_option);
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
