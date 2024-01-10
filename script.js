@@ -134,6 +134,7 @@ function displayQuestion() {
         if (userRating) {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
+        }
             
         console.log("Submit Triggered" + JSON.stringify(allResponses));
         
@@ -159,7 +160,6 @@ function displayQuestion() {
         // attach the form to the HTML document and trigger submission
         document.body.appendChild(form);
         form.submit();
-        }
     });
 
     nextButton.style.display = "block";
