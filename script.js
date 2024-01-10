@@ -2,8 +2,6 @@ var questions = [];
 var currentQuestionIndex = 0;
 var userRating = null;
 var ratingsArray = [];
-var answersArray = [];
-var responseTimeData = [];
 var allResponses = [];
 var allClicks = [];
 var studyTime = 1;
@@ -69,16 +67,6 @@ function displayQuestion() {
 
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
-    answersArray.push(option_text);
-
-    // questions[currentQuestionIndex].options.forEach(function (option, index) {
-    //     var optionDiv = document.createElement("div");
-    //     optionDiv.className = "option";
-    //     optionDiv.textContent = option;
-    //     answersArray.push(JSON.stringify(option));
-
-    //     optionsContainer.appendChild(optionDiv);
-    // });
 
     ratingScale.innerHTML = "";
     for (let i = 1; i <= 7; i++) {
@@ -108,7 +96,6 @@ function displayQuestion() {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
             ratingsArray.push(JSON.stringify(userRating));
-            responseTimeData.push(JSON.stringify(elapsedTime));
             var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
             var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
@@ -149,9 +136,6 @@ function displayQuestion() {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
             
-            answersArray.push(JSON.stringify(questions[currentQuestionIndex].option));
-            responseTimeData.push(JSON.stringify(elapsedTime));
-            }
         console.log("Submit Triggered" + JSON.stringify(allResponses));
         
         const urlParams = new URLSearchParams(window.location.search); 
@@ -176,6 +160,7 @@ function displayQuestion() {
         // attach the form to the HTML document and trigger submission
         document.body.appendChild(form);
         form.submit();
+        }
     });
 
     nextButton.style.display = "block";
