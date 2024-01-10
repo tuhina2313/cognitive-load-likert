@@ -67,11 +67,6 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
-    var question_text = JSON.stringify(questions[currentQuestionIndex].question);
-    var option_text = JSON.stringify(questions[currentQuestionIndex].option);
-    var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
-    var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
-
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
     answersArray.push(option_text);
@@ -114,6 +109,8 @@ function displayQuestion() {
             var elapsedTime = endTime - startTime;
             ratingsArray.push(JSON.stringify(userRating));
             responseTimeData.push(JSON.stringify(elapsedTime));
+            var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
+            var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
             if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
             {
@@ -127,9 +124,6 @@ function displayQuestion() {
                     displayLastPage();
                 }
             }
-            console.log("Question in next: " + JSON.stringify(questions[currentQuestionIndex].question));
-            console.log("Res next: " + option_text);
-            console.log("Tag next: " + question_tag);
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(questions[currentQuestionIndex].option), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
