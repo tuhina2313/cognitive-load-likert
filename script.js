@@ -64,6 +64,8 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
+    console.log("Questions all: " + questions);
+
     var question_text = JSON.stringify(questions[currentQuestionIndex].question);
     var option_text = JSON.stringify(questions[currentQuestionIndex].option);
     question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
