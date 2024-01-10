@@ -106,7 +106,6 @@ function displayQuestion() {
                     document.getElementById("Box1").style.display = 'none';
                     document.getElementById("Box2").style.display = 'none';
                     var endPage = document.getElementById("end-container");
-                    endPage.innerHTML = "";
                     endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end."
                     displayLastPage();
                 }
