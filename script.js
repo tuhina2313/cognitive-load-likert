@@ -127,10 +127,10 @@ function displayQuestion() {
                     displayLastPage();
                 }
             }
-            console.log("Question in next: " + question_text);
+            console.log("Question in next: " + JSON.stringify(questions[currentQuestionIndex].question));
             console.log("Res next: " + option_text);
             console.log("Tag next: " + question_tag);
-            createResponseData(question_text, option_text, question_tag, userRating, allClicks, startTime, endTime, elapsedTime);
+            createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(questions[currentQuestionIndex].option), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
