@@ -108,6 +108,7 @@ function displayQuestion() {
                     var endPage = document.getElementById("end-container");
                     endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end.";
                     submitButton.style.display = 'block';
+                    return;
                 }
             }
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(questions[currentQuestionIndex].option), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
