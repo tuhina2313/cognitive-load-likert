@@ -1,0 +1,20 @@
+INSTRUCTIONS
+
+Thank you for participating in our study! In this task, you will be presented with a series of question-answer (QA) pairs. Your task is to carefully read each QA pair and provide a rating based on your judgment of the quality and appropriateness of the answer.
+
+1. Read Carefully: Take your time to carefully read each question and its corresponding answer. Make sure you understand the context and information presented.
+
+2. Rating Scale: Please use the following rating scale to evaluate the QA pairs:
+7 (best) - the output is almost perfect, I can’t think of a way to make it much better.
+1 (worst) - the output is terrible, it’s completely useless and/or does not answer the question
+
+4. Time Limit: The study will run for approximately 30 minutes. This is ample time to evaluate each QA pair during this period.
+
+5. Compensation: Compensation will only be provided to participants who complete the entire study, taking approximately 30 minutes. Your responses will be reviewed for completeness and accuracy.
+
+6. Submit Answers: Once you have rated all the QA pairs, please click the "Submit" button to finalize your responses. Ensure that you have carefully considered each pair before submission.
+
+7. Contact Information: If you have any questions or encounter issues during the study, please contact us at —.
+
+Thank you for your valuable participation! Your input is crucial in helping us improve the quality of question-answer pairs.
+
