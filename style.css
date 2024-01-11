@@ -1,9 +1,16 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
+    text-align: left;
+    margin-top: 35px;
+    margin-left: 35px;
 }
 #question-container {
+    margin-bottom: 20px;
+}
+#question-heading{
+    font-size: 16px; /* Adjust the font size as needed */
+    position: relative;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 #rating-scale {
@@ -11,7 +18,6 @@ body {
     justify-content: space-around;
     margin-top: 20px;
     position: absolute;
-    margin-left: 8%;
 }
 .rating-option {
     cursor: pointer;
@@ -34,7 +40,6 @@ body {
     top: 30%;
     right: 50%;
 }
-
 #next-btn {
     background-color: #008CBA; /* Blue */
     border: none;
@@ -49,6 +54,7 @@ body {
 .flex-container {
     display: flex;
     margin-right: 20px;
+    width: 80%;
 }
 
 .flex-item {
@@ -58,9 +64,13 @@ body {
 }  
 
 .flex-item:Box2 {
-    margin-right: 30px;
+    text-align: center;
 } 
 #timer {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
+font-size: 18px;
+margin-bottom: 20px;
+text-align: center;
+}
+#end-container{
+text-align: center;
+}

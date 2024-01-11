@@ -4,7 +4,7 @@ var userRating = null;
 var ratingsArray = [];
 var allResponses = [];
 var allClicks = [];
-var studyTime = 1;
+var studyTime = 30;
 const startStudyTime = new Date().getTime();
 const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 
@@ -34,9 +34,7 @@ function updateTimer() {
 }
 
 function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
-    console.log("Question each: " + ques);
-    console.log("Res: " + res);
-    console.log("Tag: " + question_tag);
+
     var responseData = {
         question: ques,
         response: res,
@@ -59,12 +57,14 @@ function displayLastPage() {
 }
 
 function displayQuestion() {
+    var questionHeading = document.getElementById("question-heading");
     var questionContainer = document.getElementById("question-container");
     var optionsContainer = document.getElementById("options-container");
     var nextButton = document.getElementById("next-btn");
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
+    questionHeading.textContent = "Question "+ currentQuestionIndex;
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
 
@@ -167,7 +167,7 @@ function displayQuestion() {
     submitButton.style.display = "none";
 }
     // Entry point
-readCSV("questions-sample.csv", function (data) {
+readCSV("batch1.csv", function (data) {
     // Assuming CSV structure: question, option
     for (var i = 0; i < data.length; i++) {
         var questionData = data[i];
