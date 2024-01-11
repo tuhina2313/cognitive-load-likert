@@ -64,7 +64,7 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
-    questionHeading.textContent = "Question "+ currentQuestionIndex;
+    questionHeading.textContent = "Question "+ (currentQuestionIndex+1);
     questionContainer.textContent = questions[currentQuestionIndex].question;
     optionsContainer.textContent = questions[currentQuestionIndex].option;
 
@@ -106,7 +106,7 @@ function displayQuestion() {
                     document.getElementById("Box1").style.display = 'none';
                     document.getElementById("Box2").style.display = 'none';
                     var endPage = document.getElementById("end-container");
-                    endPage.textContent = "ATTENTION CHECK FAILED! \n Thank you for participating in the study. Please click on the submit button to end.";
+                    endPage.textContent = "ATTENTION CHECK FAILED! " + "\n" + "Thank you for participating in the study. Please click on the submit button to end.";
                     submitButton.style.display = 'block';
                     return;
                 }
