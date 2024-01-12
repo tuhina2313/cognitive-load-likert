@@ -58,8 +58,8 @@ function displayLastPage() {
 }
 
 function displayInstructions(){
-    document.getElementById("flex-container").style.display = "none";
-    document.getElementById("end-study").style.display = "none";
+    document.getElementById("flex-container").style.display = 'none';
+    document.getElementById("end-study").style.display = 'none';
     var agreeButton = document.getElementById("agree-btn");
 
     agreeButton.addEventListener("click", function () {
