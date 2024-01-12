@@ -5,6 +5,7 @@ var ratingsArray = [];
 var allResponses = [];
 var allClicks = [];
 var studyTime = 30;
+//Change the time recording 
 const startStudyTime = new Date().getTime();
 const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 
@@ -56,7 +57,19 @@ function displayLastPage() {
     endPage.textContent = "Thank you for participating in the study. Please click on the submit button to finish.";
 }
 
+function displayInstructions(){
+    document.getElementById("flex-container").style.display = "none";
+    document.getElementById("end-study").style.display = "none";
+    var agreeButton = document.getElementById("agree-btn");
+
+    agreeButton.addEventListener("click", function () {
+        displayQuestion();
+    });
+}
+
 function displayQuestion() {
+    document.getElementById("instructions-page").style.display = "none";
+
     var questionHeading = document.getElementById("question-heading");
     var questionContainer = document.getElementById("question-container");
     var optionsContainer = document.getElementById("options-container");
@@ -181,5 +194,4 @@ readCSV("batch1.csv", function (data) {
     }
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
-displayQuestion();
 });

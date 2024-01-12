@@ -8,6 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 <body>
+    <div id="instructions-page">
+        <iframe src="instructions.pdf" width="100%" height="500px" frameborder="0"></iframe>
+        <h1>I have read and understood the instructions for the study.</h1>
+        <button id="agree-btn">Agree and Continue</button>
+    </div>
     <div class="flex-container">
         <div class="flex-item" id="Box1">
             <div id="question-heading"></div>
@@ -23,9 +28,11 @@
         </div>
 
     </div>
-    <div id="timer"></div>
-    <button id="submit-btn">Submit</button>
-    <div id="end-container"></div>
+    <div id="end-study">
+        <div id="timer"></div>
+        <button id="submit-btn">Submit</button>
+        <div id="end-container"></div>
+    </div>
 
     <script type="text/javascript" src="script.js"></script>
 </body>
