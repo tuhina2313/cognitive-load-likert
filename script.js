@@ -101,9 +101,8 @@ function displayLastPage() {
 
 function displayQuestion() {
     document.getElementById("pre-study").style.display = 'none';
-    document.getElementById("question-outer").style.display = 'block';
-    document.getElementById("end-study").style.display = 'block';
-
+    document.getElementById("Box1").style.display = 'block';
+    document.getElementById("Box2").style.display = 'block';
     var questionHeading = document.getElementById("question-heading");
     var questionContainer = document.getElementById("question-container");
     var optionsContainer = document.getElementById("options-container");
