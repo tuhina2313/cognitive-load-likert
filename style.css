@@ -3,6 +3,16 @@ body {
     text-align: left;
     margin-top: 35px;
     margin-left: 35px;
+    overflow: hidden;
+}
+#instructions-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+#pdf-instructions {
+    width: 100%;
+    height: 100%;
 }
 #question-container {
     margin-bottom: 20px;
