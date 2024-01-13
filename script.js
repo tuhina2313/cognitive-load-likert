@@ -194,4 +194,5 @@ readCSV("batch1.csv", function (data) {
     }
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
+displayInstructions();
 });
