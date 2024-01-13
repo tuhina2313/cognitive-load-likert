@@ -69,7 +69,7 @@ function displayConsentForm(){
 
     document.getElementById("consent-page").style.display = 'block';
 
-    var consentButton = document.getElementById("agree-btn");
+    var consentButton = document.getElementById("consent-btn");
 
     consentButton.addEventListener("click", function () {
         displayInstructions();
