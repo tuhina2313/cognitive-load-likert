@@ -49,6 +49,48 @@ function createResponseData(ques, res, question_tag, ratingVal, allClicks, start
     allResponses.push(responseData);
 }
 
+function startStudy(){
+    document.getElementById("consent-page").style.display = 'none';
+    document.getElementById("instructions-page").style.display = 'none';
+    document.getElementById("question-outer").style.display = 'none';
+    document.getElementById("end-study").style.display = 'none';
+    var startButton = document.getElementById("start-btn");
+
+    startButton.addEventListener("click", function () {
+        displayConsentForm();
+    });
+}
+
+function displayConsentForm(){
+    document.getElementById("intro-page").style.display = 'none';
+    document.getElementById("instructions-page").style.display = 'none';
+    document.getElementById("question-outer").style.display = 'none';
+    document.getElementById("end-study").style.display = 'none';
+
+    document.getElementById("consent-page").style.display = 'block';
+
+    var consentButton = document.getElementById("agree-btn");
+
+    consentButton.addEventListener("click", function () {
+        displayInstructions();
+    });
+}
+
+function displayInstructions(){
+    document.getElementById("intro-page").style.display = 'none';
+    document.getElementById("consent-page").style.display = 'none';
+    document.getElementById("question-outer").style.display = 'none';
+    document.getElementById("end-study").style.display = 'none';
+
+    document.getElementById("instructions-page").style.display = 'block';
+
+    var agreeButton = document.getElementById("agree-btn");
+
+    agreeButton.addEventListener("click", function () {
+        displayQuestion();
+    });
+}
+
 function displayLastPage() {
     var submitButton = document.getElementById("submit-btn");
     submitButton.style.display = 'block';
@@ -57,18 +99,10 @@ function displayLastPage() {
     endPage.textContent = "Thank you for participating in the study. Please click on the submit button to finish.";
 }
 
-function displayInstructions(){
-    document.getElementById("question-outer").style.display = 'none';
-    document.getElementById("end-study").style.display = 'none';
-    var agreeButton = document.getElementById("agree-btn");
-
-    agreeButton.addEventListener("click", function () {
-        displayQuestion();
-    });
-}
-
 function displayQuestion() {
-    document.getElementById("instructions-page").style.display = "none";
+    document.getElementById("pre-study").style.display = 'none';
+    document.getElementById("question-outer").style.display = 'block';
+    document.getElementById("end-study").style.display = 'block';
 
     var questionHeading = document.getElementById("question-heading");
     var questionContainer = document.getElementById("question-container");
@@ -112,18 +146,19 @@ function displayQuestion() {
             var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
             var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
-            if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
-            {
-                if(correct_option.replace(/[^a-zA-Z0-9]/g, '') != userRating)
-                {
-                    document.getElementById("Box1").style.display = 'none';
-                    document.getElementById("Box2").style.display = 'none';
-                    var endPage = document.getElementById("end-container");
-                    endPage.textContent = "ATTENTION CHECK FAILED! " + "\n" + "Thank you for participating in the study. Please click on the submit button to end.";
-                    submitButton.style.display = 'block';
-                    return;
-                }
-            }
+            // if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
+            // {
+            //     if(correct_option.replace(/[^a-zA-Z0-9]/g, '') != userRating)
+            //     {
+            //         document.getElementById("Box1").style.display = 'none';
+            //         document.getElementById("Box2").style.display = 'none';
+            //         document.getElementById("instructions-page").style.display = "none";
+            //         var endPage = document.getElementById("end-container");
+            //         endPage.textContent = "ATTENTION CHECK FAILED! " + "\n" + "Thank you for participating in the study. Please click on the submit button to end.";
+            //         submitButton.style.display = 'block';
+            //         return;
+            //     }
+            // }
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(questions[currentQuestionIndex].option), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
@@ -139,6 +174,7 @@ function displayQuestion() {
             {
                 document.getElementById("Box1").style.display = 'none';
                 document.getElementById("Box2").style.display = 'none';
+                document.getElementById("instructions-page").style.display = "none";
                 updateTimer();
             }
         } 
@@ -194,5 +230,5 @@ readCSV("batch1.csv", function (data) {
     }
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
-displayInstructions();
+startStudy();
 });
