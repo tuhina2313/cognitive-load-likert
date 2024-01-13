@@ -18,6 +18,14 @@ function readCSV(file, callback) {
     });
 }
 
+function shuffleArray(array) {
+    // Shuffle array using Fisher-Yates algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function updateTimer() {
     var currentTime = new Date().getTime();
     const remainingTime = endStudyTime - currentTime;
@@ -231,5 +239,11 @@ readCSV("data/batch1.csv", function (data) {
     }
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
-startStudy();
+console.log('String old Array:', JSON.stringify(questions));
+
+shuffleArray(questions);
+
+console.log('New Array:', questions);
+console.log('String new Array:', JSON.stringify(questions));
+// startStudy();
 });
