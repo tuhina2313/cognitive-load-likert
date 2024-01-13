@@ -216,7 +216,7 @@ function displayQuestion() {
     submitButton.style.display = "none";
 }
     // Entry point
-readCSV("batch1.csv", function (data) {
+readCSV("data/batch1.csv", function (data) {
     // Assuming CSV structure: question, option
     for (var i = 0; i < data.length; i++) {
         var questionData = data[i];
