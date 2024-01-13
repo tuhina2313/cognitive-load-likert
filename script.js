@@ -58,7 +58,7 @@ function displayLastPage() {
 }
 
 function displayInstructions(){
-    document.getElementById("flex-container").style.display = 'none';
+    document.getElementById("question-outer").style.display = 'none';
     document.getElementById("end-study").style.display = 'none';
     var agreeButton = document.getElementById("agree-btn");
 
