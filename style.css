@@ -87,6 +87,7 @@ body {
     padding: 15px 20px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
 }
 .flex-container {
     display: inline-flex;
@@ -111,4 +112,7 @@ text-align: center;
 }
 #end-container{
 text-align: center;
+}
+#img{
+    margin-bottom: 20px;
 }
