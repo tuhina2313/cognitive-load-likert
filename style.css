@@ -5,7 +5,7 @@ body {
     margin-left: 35px;
 }
 #instructions-page {
-    width: 100vw;
+    width: 75vw;
     height: 100vh;
 }
 
@@ -76,6 +76,7 @@ body {
     color: black;
     padding: 15px 20px;
     font-size: 16px;
+    position: relative;
     cursor: pointer;
 }
 #consent-btn {
@@ -87,9 +88,9 @@ body {
     cursor: pointer;
 }
 .flex-container {
-    display: flex;
+    display: inline-flex;
     margin-right: 20px;
-    width: 80%;
+    width: 50%;
 }
 
 .flex-item {
