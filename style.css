@@ -70,6 +70,8 @@ body {
     font-size: 16px;
     position: relative;
     cursor: pointer;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 #agree-btn {
     background-color: #f6dd6a; 
