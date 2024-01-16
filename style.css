@@ -91,6 +91,7 @@ body {
     display: inline-flex;
     margin-right: 20px;
     width: 50%;
+    flex-direction: row;
 }
 
 .flex-item {
