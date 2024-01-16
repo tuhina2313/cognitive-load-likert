@@ -90,7 +90,7 @@ body {
 .flex-container {
     display: inline-flex;
     margin-right: 20px;
-    width: 50%;
+    width: 80%;
     flex-direction: row;
 }
 
