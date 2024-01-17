@@ -1,10 +1,11 @@
 var questions = [];
+var optionsArray = [];
 var currentQuestionIndex = 0;
 var userRating = null;
 var ratingsArray = [];
 var allResponses = [];
 var allClicks = [];
-var studyTime = 30;
+var studyTime = 10;
 //Change the time recording 
 const startStudyTime = new Date().getTime();
 const endStudyTime = startStudyTime + studyTime * 60 * 1000;
@@ -122,7 +123,10 @@ function displayQuestion() {
 
     questionHeading.textContent = "Question "+ (currentQuestionIndex+1);
     questionContainer.textContent = questions[currentQuestionIndex].question;
-    optionsContainer.textContent = questions[currentQuestionIndex].option;
+
+    optionsArray = questions[currentQuestionIndex].options.slice(); // Create a copy of the original array
+    optionIndex = Math.round(Math.random());
+    optionsContainer.textContent = optionsArray[optionIndex];
 
     ratingScale.innerHTML = "";
     for (let i = 1; i <= 7; i++) {
@@ -231,9 +235,9 @@ readCSV("data/batch1.csv", function (data) {
         var questionData = data[i];
         var question = {
             question: questionData[0],
-            option: questionData[1],
-            tag: questionData[2],
-            correct_option: questionData[3],
+            options: questionData.slice(1, -2),
+            tag: questionData[questionData.length - 2],
+            correct_option: questionData[questionData.length - 1],
         };
         questions.push(question);
     }
