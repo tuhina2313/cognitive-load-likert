@@ -172,7 +172,7 @@ function displayQuestion() {
             //         return;
             //     }
             // }
-            createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(questions[currentQuestionIndex].option), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
+            createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(optionsArray[optionIndex]), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
@@ -245,6 +245,6 @@ startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
 shuffleArray(questions);
-
+console.log("Data: ", JSON.stringify(questions));
 startStudy();
 });
