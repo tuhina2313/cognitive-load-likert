@@ -227,7 +227,7 @@ function displayQuestion() {
                 displayIndex++;
                 attentionCheckIdx++;
             }
-            else if (currentQuestionIndex < questions.length) 
+            if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
