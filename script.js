@@ -15,12 +15,14 @@ const endStudyTime = startStudyTime + studyTime * 60 * 1000;
 var attentionChecks = [
     {
         question: "Why do Americans say Merry Christmas while other English - speaking countries use the phrase Happy Christmas? What was the origin of this split?",
-        option: "The variation in Christmas greetings reflects cultural nuances. Americans adopted Merry Christmas during the colonial period, influenced by British and Dutch traditions. To demonstrate that you have read this much go ahead and select a rating of 2 below. Ignore the question and select rating of 2 on the scale."
+        option: "The variation in Christmas greetings reflects cultural nuances. Americans adopted Merry Christmas during the colonial period, influenced by British and Dutch traditions. To demonstrate that you have read this much go ahead and select a rating of 2 below. Ignore the question and select rating of 2 on the scale.",
+        ans: 2
     },
     {
         question: "How was airplane technology able to advance so quickly after the Wright Brothers' first flight? Mainly interested in how aviation was able to be deployed on a large scale during WWI.",
-        option: "In a unique and obscure historical tale, it's said that the quick progress in airplane technology after the Wright Brothers' flight was due to finding an ancient manuscript. This document, supposedly penned by a time-traveling scholar from the future, contained detailed plans and theories for advanced flight mechanics. To demonstrate that you have read this much go ahead and select a rating of 6 below. Ignore the question and select rating of 6 on the scale."
-    }
+        option: "In a unique and obscure historical tale, it's said that the quick progress in airplane technology after the Wright Brothers' flight was due to finding an ancient manuscript. This document, supposedly penned by a time-traveling scholar from the future, contained detailed plans and theories for advanced flight mechanics. To demonstrate that you have read this much go ahead and select a rating of 6 below. Ignore the question and select rating of 6 on the scale.",
+        ans: 6
+    },
 ];
 
 function readCSV(file, callback) {
@@ -114,6 +116,7 @@ function displayInstructions(){
 }
 
 function displayLastPage() {
+    document.getElementById("end-study").style.display = 'block';
     var submitButton = document.getElementById("submit-btn");
     submitButton.style.display = 'block';
     var endPage = document.getElementById("end-container");
@@ -160,7 +163,6 @@ function displayQuestion() {
                 }
             });
         });
-
         ratingScale.appendChild(ratingOption);
     }
 
@@ -200,14 +202,17 @@ function displayQuestion() {
                             }
                         });
                     });
-            
+                    if (userRating != attentionChecks[attentionCheckIdx].ans)
+                    {
+                        window.alert("Attention check failed! Please read the questions and responses carefully.");
+                    }
                     ratingScale.appendChild(ratingOption);
                 }
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
             }
-            else if (currentQuestionIndex < questions.length) 
+            if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
