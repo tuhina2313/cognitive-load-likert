@@ -8,6 +8,7 @@ var ratingsArray = [];
 var allResponses = [];
 var allClicks = [];
 var studyTime = 10;
+var flag = false;
 //Change the time recording 
 const startStudyTime = new Date().getTime();
 const endStudyTime = startStudyTime + studyTime * 60 * 1000;
@@ -115,6 +116,45 @@ function displayInstructions(){
     });
 }
 
+function displayAttentionChecks(){
+
+    var questionHeading = document.getElementById("question-heading");
+    var questionContainer = document.getElementById("question-container");
+    var optionsContainer = document.getElementById("options-container");
+    var nextButton = document.getElementById("next-btn");
+    var ratingScale = document.getElementById("rating-scale");
+
+    questionHeading.textContent = "Question "+ (displayIndex+1);
+    questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
+    optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
+    ratingScale.innerHTML = "";
+    for (let i = 1; i <= 7; i++) {
+        var ratingOption = document.createElement("div");
+        ratingOption.className = "rating-option";
+        ratingOption.textContent = i;
+
+        ratingOption.addEventListener("click", function () {
+            userRating = i;
+            allClicks.push(userRating);
+
+            // Remove previous selection styling
+            document.querySelectorAll('.rating-option').forEach(function (el) {
+                el.style.backgroundColor = "";
+                if (el.textContent == userRating)
+                {
+                    el.style.backgroundColor = "#e0e0e0";
+                }
+            });
+        });
+        // if (userRating != attentionChecks[attentionCheckIdx].ans)
+        // {
+        //     window.alert("Attention check failed! Please read the questions and responses carefully.");
+        // }
+        ratingScale.appendChild(ratingOption);
+    }
+    nextButton.style.display = 'block';
+}
+
 function displayLastPage() {
     document.getElementById("end-study").style.display = 'block';
     var submitButton = document.getElementById("submit-btn");
@@ -182,39 +222,10 @@ function displayQuestion() {
 
             if (currentQuestionIndex == 5 || currentQuestionIndex == 10)
             {
-                questionHeading.textContent = "Question "+ (displayIndex+1);
-                questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
-                optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
-                ratingScale.innerHTML = "";
-                for (let i = 1; i <= 7; i++) {
-                    var ratingOption = document.createElement("div");
-                    ratingOption.className = "rating-option";
-                    ratingOption.textContent = i;
-            
-                    ratingOption.addEventListener("click", function () {
-                        userRating = i;
-                        allClicks.push(userRating);
-            
-                        // Remove previous selection styling
-                        document.querySelectorAll('.rating-option').forEach(function (el) {
-                            el.style.backgroundColor = "";
-                            if (el.textContent == userRating)
-                            {
-                                el.style.backgroundColor = "#e0e0e0";
-                            }
-                        });
-                    });
-                    // if (userRating != attentionChecks[attentionCheckIdx].ans)
-                    // {
-                    //     window.alert("Attention check failed! Please read the questions and responses carefully.");
-                    // }
-                    ratingScale.appendChild(ratingOption);
-                }
+                displayAttentionChecks();
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
-                displayQuestion();
-                startTime = new Date();
             }
             else if (currentQuestionIndex < questions.length) 
             {
