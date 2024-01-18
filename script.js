@@ -224,7 +224,6 @@ function displayQuestion() {
             {
                 displayAttentionChecks();
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
-                displayIndex++;
                 attentionCheckIdx++;
                 currentQuestionIndex--;
                 flag = true;
