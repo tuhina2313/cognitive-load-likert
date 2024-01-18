@@ -179,7 +179,7 @@ function displayQuestion() {
             userRating = null; 
             allClicks = [];
 
-            if (currentQuestionIndex == 4 || currentQuestionIndex == 9)
+            if (currentQuestionIndex == 5 || currentQuestionIndex == 10)
             {
                 questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
                 optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
@@ -202,10 +202,10 @@ function displayQuestion() {
                             }
                         });
                     });
-                    if (userRating != attentionChecks[attentionCheckIdx].ans)
-                    {
-                        window.alert("Attention check failed! Please read the questions and responses carefully.");
-                    }
+                    // if (userRating != attentionChecks[attentionCheckIdx].ans)
+                    // {
+                    //     window.alert("Attention check failed! Please read the questions and responses carefully.");
+                    // }
                     ratingScale.appendChild(ratingOption);
                 }
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
