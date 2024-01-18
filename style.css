@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: left;
     margin-top: 35px;
-    margin-left: 35px;
+    margin-left: 10%;
 }
 #instructions-page {
     width: 75vw;
@@ -115,6 +115,6 @@ text-align: center;
 #end-container{
 text-align: center;
 }
-#img{
-    margin-bottom: 20px;
+#intro-page{
+    text-align: center;
 }

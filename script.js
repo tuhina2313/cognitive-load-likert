@@ -220,17 +220,20 @@ function displayQuestion() {
             userRating = null; 
             allClicks = [];
 
-            if (currentQuestionIndex == 5 || currentQuestionIndex == 10)
+            if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
             {
                 displayAttentionChecks();
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
+                currentQuestionIndex--;
+                flag = true;
             }
-            if (currentQuestionIndex < questions.length) 
+            else if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
+                flag = false;
             }
             else
             {
@@ -294,6 +297,5 @@ startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
 shuffleArray(questions);
-console.log("Data: ", JSON.stringify(questions));
 startStudy();
 });
