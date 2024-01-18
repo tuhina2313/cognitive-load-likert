@@ -244,7 +244,7 @@ readCSV("data/batch1.csv", function (data) {
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
-shuffleArray(questions);
+//shuffleArray(questions);
 console.log("Data: ", JSON.stringify(questions));
 startStudy();
 });
