@@ -213,6 +213,8 @@ function displayQuestion() {
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
+                displayQuestion();
+                startTime = new Date();
             }
             else if (currentQuestionIndex < questions.length) 
             {
