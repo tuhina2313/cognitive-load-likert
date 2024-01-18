@@ -148,8 +148,8 @@ function displayAttentionChecks(){
         });
         userRating.appendChild(ratingOption);
     }
-    return userRating;
     nextButton.style.display = 'block';
+    return userRating;
 }
 
 function displayLastPage() {
