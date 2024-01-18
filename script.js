@@ -146,7 +146,7 @@ function displayAttentionChecks(){
                 }
             });
         });
-        ratingScale.appendChild(ratingOption);
+        userRating.appendChild(ratingOption);
         if (checkRating != attentionChecks[attentionCheckIdx].ans && flag == true)
         {
             alert("Attention check failed! Please read the questions and responses carefully.");
