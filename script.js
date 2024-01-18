@@ -1,6 +1,8 @@
 var questions = [];
 var optionsArray = [];
 var currentQuestionIndex = 0;
+var displayIndex = 0;
+var attentionCheckIdx = 0;
 var userRating = null;
 var ratingsArray = [];
 var allResponses = [];
@@ -9,6 +11,17 @@ var studyTime = 10;
 //Change the time recording 
 const startStudyTime = new Date().getTime();
 const endStudyTime = startStudyTime + studyTime * 60 * 1000;
+
+var attentionChecks = [
+    {
+        question: "Why do Americans say Merry Christmas while other English - speaking countries use the phrase Happy Christmas? What was the origin of this split?",
+        option: "The variation in Christmas greetings reflects cultural nuances. Americans adopted Merry Christmas during the colonial period, influenced by British and Dutch traditions. To demonstrate that you have read this much go ahead and select a rating of 2 below. Ignore the question and select rating of 2 on the scale."
+    },
+    {
+        question: "How was airplane technology able to advance so quickly after the Wright Brothers' first flight? Mainly interested in how aviation was able to be deployed on a large scale during WWI.",
+        option: "In a unique and obscure historical tale, it's said that the quick progress in airplane technology after the Wright Brothers' flight was due to finding an ancient manuscript. This document, supposedly penned by a time-traveling scholar from the future, contained detailed plans and theories for advanced flight mechanics. To demonstrate that you have read this much go ahead and select a rating of 6 below. Ignore the question and select rating of 6 on the scale."
+    }
+];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -27,21 +40,21 @@ function shuffleArray(array) {
     }
 }
 
-function updateTimer() {
-    var currentTime = new Date().getTime();
-    const remainingTime = endStudyTime - currentTime;
-    if (remainingTime <= 0) {
-      // Time is up, show the submit button
-      displayLastPage();
-    } else {
-      // Calculate remaining minutes and seconds
-      const minutes = Math.floor(remainingTime / 60000);
-      const seconds = Math.floor((remainingTime % 60000) / 1000);
+// function updateTimer() {
+//     var currentTime = new Date().getTime();
+//     const remainingTime = endStudyTime - currentTime;
+//     if (remainingTime <= 0) {
+//       // Time is up, show the submit button
+//       displayLastPage();
+//     } else {
+//       // Calculate remaining minutes and seconds
+//       const minutes = Math.floor(remainingTime / 60000);
+//       const seconds = Math.floor((remainingTime % 60000) / 1000);
 
-      document.getElementById('timer').innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
-      setTimeout(updateTimer, 1000); // Update every second
-    }
-}
+//       document.getElementById('timer').innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
+//       setTimeout(updateTimer, 1000); // Update every second
+//     }
+// }
 
 function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
 
@@ -121,7 +134,7 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
-    questionHeading.textContent = "Question "+ (currentQuestionIndex+1);
+    questionHeading.textContent = "Question "+ (displayIndex+1);
     questionContainer.textContent = questions[currentQuestionIndex].question;
 
     optionsArray = questions[currentQuestionIndex].options.slice(); // Create a copy of the original array
@@ -156,29 +169,45 @@ function displayQuestion() {
             var endTime = new Date();
             var elapsedTime = endTime - startTime;
             ratingsArray.push(JSON.stringify(userRating));
-            var question_tag = JSON.stringify(questions[currentQuestionIndex].tag);
-            var correct_option = JSON.stringify(questions[currentQuestionIndex].correct_option);
 
-            // if (question_tag.replace(/[^a-zA-Z0-9]/g, '') == "attentionCheck")
-            // {
-            //     if(correct_option.replace(/[^a-zA-Z0-9]/g, '') != userRating)
-            //     {
-            //         document.getElementById("Box1").style.display = 'none';
-            //         document.getElementById("Box2").style.display = 'none';
-            //         document.getElementById("instructions-page").style.display = "none";
-            //         var endPage = document.getElementById("end-container");
-            //         endPage.textContent = "ATTENTION CHECK FAILED! " + "\n" + "Thank you for participating in the study. Please click on the submit button to end.";
-            //         submitButton.style.display = 'block';
-            //         return;
-            //     }
-            // }
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(optionsArray[optionIndex]), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             currentQuestionIndex++;
+            displayIndex++;
             selectedOption = null; // Reset selected option
             userRating = null; 
             allClicks = [];
 
-            if (currentQuestionIndex < questions.length) 
+            if (currentQuestionIndex == 4 || currentQuestionIndex == 9)
+            {
+                questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
+                optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
+                ratingScale.innerHTML = "";
+                for (let i = 1; i <= 7; i++) {
+                    var ratingOption = document.createElement("div");
+                    ratingOption.className = "rating-option";
+                    ratingOption.textContent = i;
+            
+                    ratingOption.addEventListener("click", function () {
+                        userRating = i;
+                        allClicks.push(userRating);
+            
+                        // Remove previous selection styling
+                        document.querySelectorAll('.rating-option').forEach(function (el) {
+                            el.style.backgroundColor = "";
+                            if (el.textContent == userRating)
+                            {
+                                el.style.backgroundColor = "#e0e0e0";
+                            }
+                        });
+                    });
+            
+                    ratingScale.appendChild(ratingOption);
+                }
+                createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
+                displayIndex++;
+                attentionCheckIdx++;
+            }
+            else if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
@@ -188,7 +217,7 @@ function displayQuestion() {
                 document.getElementById("Box1").style.display = 'none';
                 document.getElementById("Box2").style.display = 'none';
                 document.getElementById("instructions-page").style.display = "none";
-                updateTimer();
+                displayLastPage();
             }
         } 
     });
