@@ -211,8 +211,9 @@ function displayQuestion() {
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
+                currentQuestionIndex--;
             }
-            if (currentQuestionIndex < questions.length) 
+            else if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
