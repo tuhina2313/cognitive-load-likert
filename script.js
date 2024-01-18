@@ -137,6 +137,7 @@ function displayQuestion() {
     var submitButton = document.getElementById("submit-btn");
     var ratingScale = document.getElementById("rating-scale");
 
+    console.log("currentQuestionIndex: " + currentQuestionIndex);
     questionHeading.textContent = "Question "+ (displayIndex+1);
     questionContainer.textContent = questions[currentQuestionIndex].question;
 
@@ -181,6 +182,7 @@ function displayQuestion() {
 
             if (currentQuestionIndex == 5 || currentQuestionIndex == 10)
             {
+                questionHeading.textContent = "Question "+ (displayIndex+1);
                 questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
                 optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
                 ratingScale.innerHTML = "";
@@ -211,7 +213,6 @@ function displayQuestion() {
                 createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
                 displayIndex++;
                 attentionCheckIdx++;
-                currentQuestionIndex--;
             }
             else if (currentQuestionIndex < questions.length) 
             {
