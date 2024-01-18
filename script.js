@@ -147,6 +147,10 @@ function displayAttentionChecks(){
             });
         });
         ratingScale.appendChild(ratingOption);
+        if (checkRating != attentionChecks[attentionCheckIdx].ans && flag == true)
+        {
+            alert("Attention check failed! Please read the questions and responses carefully.");
+        }
     }
     nextButton.style.display = 'block';
 }
@@ -223,10 +227,6 @@ function displayQuestion() {
                 attentionCheckIdx++;
                 currentQuestionIndex--;
                 flag = true;
-                if (checkRating != attentionChecks[attentionCheckIdx].ans && flag == true)
-                {
-                    alert("Attention check failed! Please read the questions and responses carefully.");
-                }
             }
             else if (currentQuestionIndex < questions.length) 
             {
