@@ -146,7 +146,7 @@ function displayAttentionChecks(){
                 }
             });
         });
-        userRating.appendChild(ratingOption);
+        ratingScale.appendChild(ratingOption);
     }
     nextButton.style.display = 'block';
     return userRating;
