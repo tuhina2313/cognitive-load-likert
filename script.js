@@ -146,10 +146,10 @@ function displayAttentionChecks(){
                 }
             });
         });
-        // if (userRating != attentionChecks[attentionCheckIdx].ans)
-        // {
-        //     window.alert("Attention check failed! Please read the questions and responses carefully.");
-        // }
+        if (userRating != attentionChecks[attentionCheckIdx].ans)
+        {
+            alert("Attention check failed! Please read the questions and responses carefully.");
+        }
         ratingScale.appendChild(ratingOption);
     }
     nextButton.style.display = 'block';
