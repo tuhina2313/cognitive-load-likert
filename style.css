@@ -1,8 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: left;
-    margin-top: 35px;
-    margin-left: 35px;
+    text-align: center;
+    margin: 30px;
 }
 #instructions-page {
     width: 75vw;
