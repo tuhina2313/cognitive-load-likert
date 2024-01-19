@@ -234,21 +234,21 @@ function displayQuestion() {
             userRating = null; 
             allClicks = [];
 
-            if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
-            {
-                checkRating = displayAttentionChecks();
-                createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
-                attentionCheckIdx++;
-                currentQuestionIndex--;
-                flag = true;
-                console.log("Function return: " + checkRating);
-                console.log("AC ans: " + attentionChecks[attentionCheckIdx].ans);
-                if (checkRating != attentionChecks[attentionCheckIdx].ans)
-                {
-                    alert("Attention check failed! Please read the questions and responses carefully.");
-                }
-            }
-            else if (currentQuestionIndex < questions.length) 
+            // if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
+            // {
+            //     checkRating = displayAttentionChecks();
+            //     createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
+            //     attentionCheckIdx++;
+            //     currentQuestionIndex--;
+            //     flag = true;
+            //     console.log("Function return: " + checkRating);
+            //     console.log("AC ans: " + attentionChecks[attentionCheckIdx].ans);
+            //     if (checkRating != attentionChecks[attentionCheckIdx].ans)
+            //     {
+            //         alert("Attention check failed! Please read the questions and responses carefully.");
+            //     }
+            // }
+            if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
                 startTime = new Date(); // Record start time for the next question
@@ -317,5 +317,5 @@ console.log("Number of questions: " + questions.length);
 
 questions = shuffleArray(questions, [5, 11]);
 console.log(JSON.stringify(questions));
-// startStudy();
+startStudy();
 });
