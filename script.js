@@ -315,7 +315,8 @@ readCSV("data/batch1.csv", function (data) {
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
+console.log("Before" + JSON.stringify(questions));
 questions = shuffleArray(questions, [5, 11]);
-console.log(JSON.stringify(questions));
+console.log("After" + JSON.stringify(questions));
 startStudy();
 });
