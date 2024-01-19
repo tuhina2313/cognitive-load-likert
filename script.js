@@ -234,6 +234,12 @@ function displayQuestion() {
             userRating = null; 
             allClicks = [];
 
+            if ((questions[currentQuestionIndex].tag == "attentionCheck") && userRating != questions[currentQuestionIndex].correct_option)
+            {
+                console.log("Check: "+ questions[currentQuestionIndex].tag + "Rating: " + userRating);
+                alert("Attention check failed! Please read the questions and responses carefully.");
+            }
+
             // if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
             // {
             //     checkRating = displayAttentionChecks();
@@ -315,8 +321,6 @@ readCSV("data/batch1.csv", function (data) {
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
-console.log("Before" + JSON.stringify(questions));
 questions = shuffleArray(questions, [5, 11]);
-console.log("After" + JSON.stringify(questions));
 startStudy();
 });
