@@ -35,12 +35,29 @@ function readCSV(file, callback) {
     });
 }
 
-function shuffleArray(array) {
-    // Shuffle array using Fisher-Yates algorithm
-    for (let i = array.length - 1; i > 0; i--) {
+// function shuffleArray(array) {
+//     // Shuffle array using Fisher-Yates algorithm
+//     for (let i = array.length - 1; i > 0; i--) {
+//         const j = Math.floor(Math.random() * (i + 1));
+//         [array[i], array[j]] = [array[j], array[i]];
+//     }
+// }
+
+function shuffleArray(array, constantIndices) {
+    const shuffledArray = array.slice(); // Create a shallow copy of the original array
+
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+
+        // Swap elements except for constant indices
+        if (!constantIndices.includes(i) && !constantIndices.includes(j)) {
+            const temp = shuffledArray[i];
+            shuffledArray[i] = shuffledArray[j];
+            shuffledArray[j] = temp;
+        }
     }
+
+    return shuffledArray;
 }
 
 // function updateTimer() {
@@ -298,6 +315,7 @@ readCSV("data/batch1.csv", function (data) {
 startTime = new Date();
 console.log("Number of questions: " + questions.length);
 
-shuffleArray(questions);
-startStudy();
+questions = shuffleArray(questions, [5, 10]);
+console.log(JSON.stringify(questions));
+// startStudy();
 });
