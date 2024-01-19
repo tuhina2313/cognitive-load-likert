@@ -228,17 +228,18 @@ function displayQuestion() {
             ratingsArray.push(JSON.stringify(userRating));
 
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(optionsArray[optionIndex]), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
-            currentQuestionIndex++;
-            displayIndex++;
-            selectedOption = null; // Reset selected option
-            userRating = null; 
-            allClicks = [];
-
+            
             if ((questions[currentQuestionIndex].tag == "attentionCheck") && userRating != questions[currentQuestionIndex].correct_option)
             {
                 console.log("Check: "+ questions[currentQuestionIndex].tag + "Rating: " + userRating);
                 alert("Attention check failed! Please read the questions and responses carefully.");
             }
+            
+            currentQuestionIndex++;
+            displayIndex++;
+            selectedOption = null; // Reset selected option
+            userRating = null; 
+            allClicks = [];
 
             // if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
             // {
