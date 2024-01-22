@@ -180,8 +180,9 @@ function displayLastPage() {
 
 function displayQuestion() {
     document.getElementById("pre-study").style.display = 'none';
+    var startTime = new Date();
+    
     document.getElementById("question-outer").style.display = 'block';
-
     document.getElementById("Box1").style.display = 'block';
     document.getElementById("Box2").style.display = 'block';
     var questionHeading = document.getElementById("question-heading");
@@ -319,7 +320,7 @@ readCSV("data/batch1.csv", function (data) {
         };
         questions.push(question);
     }
-startTime = new Date();
+
 console.log("Number of questions: " + questions.length);
 
 questions = shuffleArray(questions, [5, 11]);

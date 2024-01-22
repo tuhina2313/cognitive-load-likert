@@ -21,6 +21,15 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
 }
+#rating-text{
+    border: 2px solid #dcdcdc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: inline-block; 
+    color: #000000;
+  }
 #rating-scale {
     display: flex;
     justify-content: space-around;
