@@ -9,22 +9,6 @@ var allResponses = [];
 var allClicks = [];
 var studyTime = 10;
 var flag = false;
-//Change the time recording 
-const startStudyTime = new Date().getTime();
-const endStudyTime = startStudyTime + studyTime * 60 * 1000;
-
-var attentionChecks = [
-    {
-        question: "Why do Americans say Merry Christmas while other English - speaking countries use the phrase Happy Christmas? What was the origin of this split?",
-        option: "The variation in Christmas greetings reflects cultural nuances. Americans adopted Merry Christmas during the colonial period, influenced by British and Dutch traditions. To demonstrate that you have read this much go ahead and select a rating of 2 below. Ignore the question and select rating of 2 on the scale.",
-        ans: 2
-    },
-    {
-        question: "How was airplane technology able to advance so quickly after the Wright Brothers' first flight? Mainly interested in how aviation was able to be deployed on a large scale during WWI.",
-        option: "In a unique and obscure historical tale, it's said that the quick progress in airplane technology after the Wright Brothers' flight was due to finding an ancient manuscript. This document, supposedly penned by a time-traveling scholar from the future, contained detailed plans and theories for advanced flight mechanics. To demonstrate that you have read this much go ahead and select a rating of 6 below. Ignore the question and select rating of 6 on the scale.",
-        ans: 6
-    },
-];
 
 function readCSV(file, callback) {
     Papa.parse(file, {
@@ -59,22 +43,6 @@ function shuffleArray(array, constantIndices) {
 
     return shuffledArray;
 }
-
-// function updateTimer() {
-//     var currentTime = new Date().getTime();
-//     const remainingTime = endStudyTime - currentTime;
-//     if (remainingTime <= 0) {
-//       // Time is up, show the submit button
-//       displayLastPage();
-//     } else {
-//       // Calculate remaining minutes and seconds
-//       const minutes = Math.floor(remainingTime / 60000);
-//       const seconds = Math.floor((remainingTime % 60000) / 1000);
-
-//       document.getElementById('timer').innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
-//       setTimeout(updateTimer, 1000); // Update every second
-//     }
-// }
 
 function createResponseData(ques, res, question_tag, ratingVal, allClicks, startT, endT, elaspsedT){
 
@@ -131,42 +99,6 @@ function displayInstructions(){
     agreeButton.addEventListener("click", function () {
         displayQuestion();
     });
-}
-
-function displayAttentionChecks(){
-
-    var questionHeading = document.getElementById("question-heading");
-    var questionContainer = document.getElementById("question-container");
-    var optionsContainer = document.getElementById("options-container");
-    var nextButton = document.getElementById("next-btn");
-    var ratingScale = document.getElementById("rating-scale");
-
-    questionHeading.textContent = "Question "+ (displayIndex+1);
-    questionContainer.textContent = attentionChecks[attentionCheckIdx].question;
-    optionsContainer.textContent = attentionChecks[attentionCheckIdx].option;
-    ratingScale.innerHTML = "";
-    for (let i = 1; i <= 7; i++) {
-        var ratingOption = document.createElement("div");
-        ratingOption.className = "rating-option";
-        ratingOption.textContent = i;
-
-        ratingOption.addEventListener("click", function () {
-            userRating = i;
-            allClicks.push(userRating);
-
-            // Remove previous selection styling
-            document.querySelectorAll('.rating-option').forEach(function (el) {
-                el.style.backgroundColor = "";
-                if (el.textContent == userRating)
-                {
-                    el.style.backgroundColor = "#e0e0e0";
-                }
-            });
-        });
-        ratingScale.appendChild(ratingOption);
-    }
-    nextButton.style.display = 'block';
-    return userRating;
 }
 
 function displayLastPage() {
@@ -242,20 +174,6 @@ function displayQuestion() {
             userRating = null; 
             allClicks = [];
 
-            // if ((currentQuestionIndex == 5 || currentQuestionIndex == 10) && flag == false)
-            // {
-            //     checkRating = displayAttentionChecks();
-            //     createResponseData(JSON.stringify(attentionChecks[attentionCheckIdx].question), JSON.stringify(attentionChecks[attentionCheckIdx].option), "AC", userRating, allClicks, startTime, endTime, elapsedTime);
-            //     attentionCheckIdx++;
-            //     currentQuestionIndex--;
-            //     flag = true;
-            //     console.log("Function return: " + checkRating);
-            //     console.log("AC ans: " + attentionChecks[attentionCheckIdx].ans);
-            //     if (checkRating != attentionChecks[attentionCheckIdx].ans)
-            //     {
-            //         alert("Attention check failed! Please read the questions and responses carefully.");
-            //     }
-            // }
             if (currentQuestionIndex < questions.length) 
             {
                 displayQuestion();
