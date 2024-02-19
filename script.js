@@ -162,7 +162,7 @@ function displayQuestion() {
 
             createResponseData(JSON.stringify(questions[currentQuestionIndex].question), JSON.stringify(optionsArray[optionIndex]), JSON.stringify(questions[currentQuestionIndex].tag), userRating, allClicks, startTime, endTime, elapsedTime);
             
-            if ((questions[currentQuestionIndex].tag == "attentionCheck") && userRating != questions[currentQuestionIndex].correct_option)
+            if ((questions[currentQuestionIndex].tag == "attentionCheck") && userRating != questions[currentQuestionIndex].type)
             {
                 console.log("Check: "+ questions[currentQuestionIndex].tag + "Rating: " + userRating);
                 alert("Attention check failed! Please read the questions and responses carefully.");
@@ -226,7 +226,7 @@ function displayQuestion() {
     submitButton.style.display = "none";
 }
     // Entry point
-readCSV("data/batch1.csv", function (data) {
+readCSV("data/batch2.csv", function (data) {
     // Assuming CSV structure: question, option
     for (var i = 0; i < data.length; i++) {
         var questionData = data[i];
@@ -234,7 +234,7 @@ readCSV("data/batch1.csv", function (data) {
             question: questionData[0],
             options: questionData.slice(1, -2),
             tag: questionData[questionData.length - 2],
-            correct_option: questionData[questionData.length - 1],
+            type: questionData[questionData.length - 1],
         };
         questions.push(question);
     }
